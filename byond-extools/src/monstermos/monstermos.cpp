@@ -360,9 +360,13 @@ trvh turf_update_visuals(unsigned int args_len, Value* args, Value src) {
 	std::vector<Value> overlay_types;
 
 	if (!gas_overlays.size() || !gas_moles_visible.size())
+	{
 		for (int gas_type : gas_specific_heat)
+		{
 			gas_overlays.push_back({}); //this is janky I'm sorry I will come back and fix this when I have time.
 			gas_moles_visible.push_back({});
+		}
+	}
 
 	for (int i = 0; i < total_num_gases; i++) {
 		if (!gas_overlays[i].size()) continue;
