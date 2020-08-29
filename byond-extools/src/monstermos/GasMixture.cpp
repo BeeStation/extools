@@ -16,13 +16,18 @@ GasMixture::GasMixture(float v)
     if(v < 0) v = 0;
     volume = v;
 
-	for (int gas_type : gas_specific_heat)
-		moles.push_back(0.0f); //shitty way to repopulate the moles but it works for now
+	for (int i = 0; i < total_num_gases; i++) {
+		moles.push_back(0.0f);
+		moles_archived.push_back(0.0f);
+	}
+
 }
 
 GasMixture::GasMixture() {
-	for (int gas_type : gas_specific_heat)
-		moles.push_back(0.0f); //shitty way to repopulate the moles but it works for now
+	for (int i = 0; i < total_num_gases; i++) {
+		moles.push_back(0.0f);
+		moles_archived.push_back(0.0f);
+	}
 }
 
 void GasMixture::mark_immutable() {
@@ -107,6 +112,7 @@ GasMixture GasMixture::remove_ratio(float ratio) {
 
 void GasMixture::copy_from_mutable(const GasMixture &sample) {
     if(immutable) return;
+
 	moles = sample.moles;
     temperature = sample.temperature;
 }
@@ -211,8 +217,8 @@ void GasMixture::clear() {
 	if (immutable) return;
 	moles.clear();
 
-	for (int gas_type : gas_specific_heat)
-		moles.push_back(0.0f); //shitty way to repopulate the moles but it works for now
+	for (int i = 0; i < total_num_gases; i++)
+		moles.push_back(0.0f);
 }
 
 void GasMixture::multiply(float multiplier) {

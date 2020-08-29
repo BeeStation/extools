@@ -3,6 +3,7 @@
 #include "atmos_defines.h"
 #include "monstermos.h"
 #include <vector>
+#include <memory>
 
 #define GAS_MIN_MOLES 0.00000005
 #define MINIMUM_HEAT_CAPACITY	0.0003
@@ -49,7 +50,7 @@ class GasMixture
 		inline float get_last_share() const { return last_share; }
 
     private:
-        std::vector<float> moles;
+		std::vector<float> moles;
 		std::vector<float> moles_archived;
         float temperature = 0;
         float temperature_archived;

@@ -359,12 +359,9 @@ trvh turf_update_visuals(unsigned int args_len, Value* args, Value src) {
 	Value old_overlay_types_val = src.get_by_id(str_id_atmos_overlay_types);
 	std::vector<Value> overlay_types;
 
-	if (!gas_overlays.size())
+	if (!gas_overlays.size() || !gas_moles_visible.size())
 		for (int gas_type : gas_specific_heat)
-			gas_overlays.push_back({}); //this is janky I'm sorry I don't have the time to do a more elegant solution
-
-	if (!gas_moles_visible.size())
-		for (int gas_type : gas_specific_heat)
+			gas_overlays.push_back({}); //this is janky I'm sorry I will come back and fix this when I have time.
 			gas_moles_visible.push_back({});
 
 	for (int i = 0; i < total_num_gases; i++) {
