@@ -1,13 +1,13 @@
 #pragma once
 
 #include "atmos_defines.h"
-
-#define TOTAL_NUM_GASES 14
+#include "monstermos.h"
 
 #define GAS_MIN_MOLES 0.00000005
 #define MINIMUM_HEAT_CAPACITY	0.0003
 
-extern float gas_specific_heat[TOTAL_NUM_GASES];
+extern std::vector<float> gas_specific_heat;
+
 
 class GasMixture
 {
@@ -21,7 +21,7 @@ class GasMixture
 		void set_min_heat_capacity(float n);
         inline float total_moles() const { // inlined for debugging reasons
             float capacity = 0;
-            for (int i = 0; i < TOTAL_NUM_GASES; i++) {
+            for (int i = 0; i < total_num_gases; i++) {
                 capacity += moles[i];
             }
             return capacity;
@@ -49,8 +49,8 @@ class GasMixture
 
     private:
         GasMixture();
-        float moles[TOTAL_NUM_GASES];
-        float moles_archived[TOTAL_NUM_GASES];
+        std::vector<float> moles;
+        std::vector<float> moles_archived;
         float temperature = 0;
         float temperature_archived;
         float volume;
